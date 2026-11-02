@@ -9,7 +9,7 @@
     '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">' +
     '<path d="M9 2h5v5M14 2 7.5 8.5M12 9.5V13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h3.5"/></svg>';
 
-  var state = { level: null, mode: "views", view: 0 };
+  var state = { level: null, mode: "plan", view: 0 };
 
   var el = {
     title: document.getElementById("project-title"),
@@ -302,7 +302,7 @@
     var levelId = getLevel(parts[0]) ? parts[0] : null;
     return {
       level: levelId,
-      mode: parts[1] === "plan" ? "plan" : "views",
+      mode: parts[1] === "views" ? "views" : "plan",
       view: Math.max(0, (parseInt(parts[2], 10) || 1) - 1),
     };
   }
@@ -356,7 +356,7 @@
   var fromHash = readHash();
   var fallback = getLevel(data.defaultLevel) ? data.defaultLevel : (getLevel("level-1") ? "level-1" : (levels[0] && levels[0].id));
   state.level = fromHash.level || fallback;
-  state.mode = fromHash.level ? fromHash.mode : "views";
+  state.mode = fromHash.level ? fromHash.mode : "plan";
   state.view = fromHash.level ? fromHash.view : 0;
 
   renderNav();
