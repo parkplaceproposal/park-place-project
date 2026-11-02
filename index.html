@@ -8,12 +8,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;500;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=202611022013">
+  <link rel="stylesheet" href="styles.css?v=202611022038">
 </head>
 <body>
   <header class="site-header">
     <div class="wrap">
-      <img class="brand-logo" src="images/logo.png" alt="Park Place Outreach logo" width="356" height="334">
+      <a class="brand-home" href="#lobby" aria-label="Back to the lobby"><img class="brand-logo" src="images/logo.png" alt="Park Place Outreach logo" width="356" height="334"></a>
       <div class="brand-text">
         <h1 id="project-title">Park Place Renovation and Expansion Proposal</h1>
       </div>
@@ -21,8 +21,25 @@
   </header>
   <div class="brand-band" aria-hidden="true"></div>
 
+  <section class="lobby" id="lobby" aria-label="Lobby">
+    <div class="wrap lobby__inner">
+      <div class="lobby__text">
+        <p class="lobby__lead"><span>Welcome in.</span> <span>Take a look around.</span></p>
+        <div class="lobby__actions">
+          <a class="btn btn--primary" href="#basement--plan">Start exploring
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+      <div class="lobby__house" id="lobby-house"></div>
+    </div>
+  </section>
+
+  <div id="explore" hidden>
   <nav class="level-nav" aria-label="Levels">
     <div class="wrap">
+      <a class="level-home" href="#lobby" aria-label="Back to the lobby" title="Lobby">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5M5.5 9.5V20h13V9.5"/></svg>
+      </a>
       <div class="level-nav__list" id="level-nav" role="tablist"></div>
     </div>
   </nav>
@@ -37,13 +54,15 @@
     </div>
 
     <section id="panel" aria-live="polite"></section>
+    <nav class="level-pager" id="level-pager" aria-label="Previous and next level"></nav>
   </main>
+  </div>
 
   <footer class="site-footer">
     <div class="wrap"><strong>Park Place Outreach</strong><span>Renovation and Expansion Proposal</span></div>
   </footer>
 
-  <script src="content.js?v=202611022013"></script>
-  <script src="app.js?v=202611022013"></script>
+  <script src="content.js?v=202611022038"></script>
+  <script src="app.js?v=202611022038"></script>
 </body>
 </html>
