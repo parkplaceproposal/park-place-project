@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Park Place Renovation and Expansion Proposal</title>
+  <meta name="description" content="Level-by-level 3D views and floor plans for the Park Place renovation and expansion proposal.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;500;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <img class="brand-logo" src="images/logo.png" alt="Park Place Outreach logo" width="356" height="334">
+      <div class="brand-text">
+        <h1 id="project-title">Park Place Renovation and Expansion Proposal</h1>
+      </div>
+    </div>
+  </header>
+  <div class="brand-band" aria-hidden="true"></div>
+
+  <nav class="level-nav" aria-label="Levels">
+    <div class="wrap">
+      <div class="level-nav__list" id="level-nav" role="tablist"></div>
+    </div>
+  </nav>
+
+  <main class="wrap" id="main">
+    <div class="level-head">
+      <h2 id="level-title"></h2>
+      <div class="segmented" role="tablist" aria-label="Content type">
+        <button type="button" role="tab" data-mode="plan" id="tab-plan">Floor Plan</button>
+        <button type="button" role="tab" data-mode="views" id="tab-views">3D Views</button>
+      </div>
+    </div>
+
+    <section id="panel" aria-live="polite"></section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap"><strong>Park Place Outreach</strong><span>Renovation and Expansion Proposal</span></div>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
