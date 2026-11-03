@@ -491,7 +491,7 @@
     renderPager();
   }
 
-  /* ---------- URL hash: #lobby, #level-2--plan, #level-2--views--2 ---------- */
+  /* ---------- URL hash: (none) = lobby, #level-2--plan, #level-2--views--2 ---------- */
 
   function readHash() {
     var raw = decodeURIComponent(location.hash.replace(/^#/, ""));
@@ -529,6 +529,7 @@
   }
 
   function applyHash() {
+    if (/^#lobby$/i.test(location.hash)) history.replaceState(null, "", location.pathname + location.search);
     var h = readHash();
     var wasLobby = state.lobby;
     state.lobby = h.lobby;
@@ -562,11 +563,23 @@
     scrollToContent();
   });
   window.addEventListener("hashchange", applyHash);
+  window.addEventListener("popstate", applyHash);
+
+  // The logo goes back to the lobby with a clean address (no "#..." at the end)
+  var home = document.querySelector(".brand-home");
+  if (home) home.addEventListener("click", function (e) {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return; // let "open in new tab" work
+    e.preventDefault();
+    if (location.hash) history.pushState(null, "", location.pathname + location.search);
+    applyHash();
+  });
 
   /* ---------- Start ---------- */
 
   var first = levels.filter(function (l) { return !l.planOnly; });
   state.level = getLevel(data.defaultLevel) ? data.defaultLevel : (first[0] && first[0].id);
+  // Old links ending in "#lobby" open the lobby with a clean address
+  if (/^#lobby$/i.test(location.hash)) history.replaceState(null, "", location.pathname + location.search);
   renderHouse();
   renderNav();
   applyHash();
