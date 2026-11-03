@@ -657,27 +657,6 @@ html.tour-open, html.tour-open body { overflow: hidden; }
 .brand-home:hover .brand-logo { transform: translateY(-2px); }
 .brand-logo { transition: transform .2s; }
 
-.level-home {
-  flex: none;
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  color: var(--violet);
-  transition: border-color .15s, color .15s;
-}
-.level-home:hover { border-color: var(--red); color: var(--red); }
-.level-home svg {
-  width: 19px; height: 19px;
-  fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
-}
-@media (max-width: 600px) {
-  .level-nav .wrap { gap: 8px; }
-  .level-home { width: 37px; height: 37px; }
-}
 
 /* ---------- Lobby ---------- */
 .lobby { padding-block: clamp(32px, 6vw, 72px) clamp(40px, 7vw, 88px); }
