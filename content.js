@@ -61,8 +61,8 @@ window.PROPOSAL = {
       floorPlan: "level-2.png",
       floorPlanFull: "level-2.pdf",
       views: [
-        { name: "Living Room", url: "https://kuula.co/share/LCmyD?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1", pin: { x: 58.3, y: 56.5 } },
-        { name: "Library", url: "https://kuula.co/share/LCJtp?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1", pin: { x: 40.7, y: 43.6 } },
+        { name: "Living Room", url: "https://kuula.co/share/LCmyD?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1", pin: { x: 58.4, y: 56.5 } },
+        { name: "Library", url: "https://kuula.co/share/LCJtp?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1", pin: { x: 40.6, y: 43.4 } },
       ],
     },
     {
