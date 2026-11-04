@@ -579,10 +579,11 @@
   // up into the header while the lobby fades in. Any click, tap or key skips it.
   function runIntro() {
     var root = document.documentElement;
-    var logo = document.querySelector(".brand-home");
-    var title = document.querySelector(".brand-text");
+    var brand = document.querySelector(".site-header .wrap"); // logo + title, moved as one unit
+    var logo = document.querySelector(".brand-logo");
+    var h1 = document.getElementById("project-title");
     var inner = document.querySelector(".lobby__inner");
-    var parts = [logo, title, inner];
+    var parts = [brand, inner];
     var timers = [], done = false;
     var skipEvents = ["pointerdown", "keydown", "wheel", "touchstart"];
 
@@ -601,47 +602,41 @@
     function start() {
       if (done) return;
       window.scrollTo(0, 0);
-      var L = logo.getBoundingClientRect(), E = title.getBoundingClientRect();
-      // Measure the title text itself (its box can be wider than the words)
+      // The visible group = logo + title words (not their wider boxes)
+      var L = logo.getBoundingClientRect();
       var range = document.createRange();
-      range.selectNodeContents(title.querySelector("h1") || title);
+      range.selectNodeContents(h1);
       var T = range.getBoundingClientRect();
-      if (!T.width) T = E;
+      var B = brand.getBoundingClientRect();
+      var gl = Math.min(L.left, T.left), gr = Math.max(L.right, T.right);
+      var gt = Math.min(L.top, T.top), gb = Math.max(L.bottom, T.bottom);
+      var gw = gr - gl, gh = gb - gt, cx = gl + gw / 2, cy = gt + gh / 2;
       var vw = window.innerWidth, vh = window.innerHeight;
-      var sL = Math.min(vw * 0.42, 230) / L.width, lh = L.height * sL;
-      var sT = Math.min(1.3, (vw * 0.88) / T.width), th = T.height * sT;
-      var gap = Math.max(20, vh * 0.03);
-      var top = (vh - (lh + gap + th)) / 2;
-      var lx = vw / 2 - (L.left + L.width / 2), ly = top + lh / 2 - (L.top + L.height / 2);
-      var tx = vw / 2 - (T.left + T.width / 2), ty = top + lh + gap + th / 2 - (T.top + T.height / 2);
-      var logoAt = "translate(" + lx + "px," + ly + "px) scale(";
-      var titleAt = "translate(" + tx + "px," + ty + "px) scale(";
+      var s = Math.max(1, Math.min((vw * 0.84) / gw, (vh * 0.42) / gh, 2.2));
+      var moveTo = "translate(" + (vw / 2 - cx) + "px," + (vh / 2 - cy) + "px) scale(";
 
-      // 1. Place them big and centered (invisible), then fade them in
-      logo.style.transformOrigin = "50% 50%";
-      title.style.transformOrigin = (T.left + T.width / 2 - E.left) + "px " + (T.top + T.height / 2 - E.top) + "px";
-      logo.style.transition = title.style.transition = "none";
-      logo.style.transform = logoAt + sL * 0.94 + ")";
-      title.style.transform = titleAt + sT * 0.97 + ")";
+      // 1. Centered and larger, fading in
+      brand.style.transformOrigin = (cx - B.left) + "px " + (cy - B.top) + "px";
+      brand.style.transition = "none";
+      brand.style.transform = moveTo + s * 0.96 + ")";
       inner.style.transform = "translateY(18px)";
-      void logo.offsetWidth;
-      logo.style.transition = title.style.transition = "opacity .6s ease, transform .7s cubic-bezier(.2,.8,.2,1)";
-      logo.style.opacity = title.style.opacity = "1";
-      logo.style.transform = logoAt + sL + ")";
-      title.style.transform = titleAt + sT + ")";
+      void brand.offsetWidth;
+      brand.style.transition = "opacity .7s ease, transform .9s cubic-bezier(.2,.8,.2,1)";
+      brand.style.opacity = "1";
+      brand.style.transform = moveTo + s + ")";
 
-      // 2. Glide up into the header
-      at(1400, function () {
-        logo.style.transition = title.style.transition = "transform 1.1s cubic-bezier(.65,0,.35,1)";
-        logo.style.transform = title.style.transform = "";
+      // 2. Glide up into the header as one piece
+      at(1300, function () {
+        brand.style.transition = "transform 1.2s cubic-bezier(.65,0,.35,1)";
+        brand.style.transform = "";
       });
       // 3. Reveal the lobby underneath
-      at(1800, function () {
+      at(2250, function () {
         root.classList.add("intro-reveal");
-        inner.style.transition = "transform .8s cubic-bezier(.2,.8,.2,1)";
+        inner.style.transition = "transform .9s cubic-bezier(.2,.8,.2,1)";
         inner.style.transform = "";
       });
-      at(2700, finish);
+      at(3150, finish);
     }
 
     // Wait for the fonts so the title is measured at its real size
