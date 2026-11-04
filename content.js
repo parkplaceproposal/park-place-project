@@ -74,7 +74,7 @@ window.PROPOSAL = {
       floorPlan: "dormer.png",
       floorPlanFull: "dormer.pdf",
       views: [
-        // { name: "View name", url: "https://kuula.co/share/XXXXX" },
+        { name: "Kitchenette", url: "https://kuula.co/share/LC6vg?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1", pin: { x: 79.0, y: 43.4 } },
       ],
     },
 

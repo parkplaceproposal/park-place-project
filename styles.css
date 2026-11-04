@@ -479,7 +479,7 @@ main.wrap { padding-top: 28px; padding-bottom: 48px; }
   .zoom-controls button { width: 38px; height: 38px; }
   .pin__label { font-size: 11px; padding: 5px 8px; }
   .pin .pin__label { left: 24px; }
-  .pin--left .pin__label { right: 24px; }
+  .pin--left .pin__label { left: auto; right: 24px; }
 }
 
 .caption__links {
