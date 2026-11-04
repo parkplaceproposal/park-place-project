@@ -23,9 +23,6 @@
     house: document.getElementById("lobby-house"),
     nav: document.getElementById("level-nav"),
     levelTitle: document.getElementById("level-title"),
-    tabViews: document.getElementById("tab-views"),
-    tabPlan: document.getElementById("tab-plan"),
-    modeSwitch: document.querySelector(".segmented"),
     panel: document.getElementById("panel"),
     pager: document.getElementById("level-pager"),
   };
@@ -480,11 +477,8 @@
     });
     el.levelTitle.textContent = level.name;
     // Plan-only sections (e.g. Site Plan) have no 3D views, so hide the switch
-    var planOnly = !!level.planOnly;
-    el.modeSwitch.hidden = planOnly;
-    var mode = planOnly ? "plan" : state.mode;
-    el.tabViews.setAttribute("aria-selected", String(mode === "views"));
-    el.tabPlan.setAttribute("aria-selected", String(mode === "plan"));
+    // Every level shows its floor plan; 3D views open from the pins
+    var mode = "plan";
     el.panel.innerHTML = mode === "plan" ? renderPlan(level) : renderViews(level);
     var zoom = el.panel.querySelector(".plan-zoom");
     if (zoom) setupZoom(zoom);
@@ -508,8 +502,7 @@
   function writeHash() {
     if (state.lobby) return;
     var lvl = getLevel(state.level);
-    var mode = lvl && lvl.planOnly ? "plan" : state.mode;
-    var h = "#" + state.level + "--" + mode + (mode === "views" && state.view ? "--" + (state.view + 1) : "");
+    var h = "#" + state.level + "--plan";
     if (location.hash !== h) history.replaceState(null, "", h);
   }
 
@@ -544,8 +537,6 @@
     var b = e.target.closest(".level-btn");
     if (b) update({ level: b.getAttribute("data-level"), view: 0 });
   });
-  el.tabViews.addEventListener("click", function () { update({ mode: "views" }); });
-  el.tabPlan.addEventListener("click", function () { update({ mode: "plan" }); });
   el.panel.addEventListener("click", function (e) {
     var b = e.target.closest(".view-btn");
     if (b) return update({ view: parseInt(b.getAttribute("data-view"), 10) });
