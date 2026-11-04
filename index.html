@@ -9,6 +9,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Encode+Sans:wght@400;500;600&family=Poppins:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css?v=202611031830">
+  <script>
+    /* Intro animation: only when the page opens on the lobby, and not for reduce-motion users */
+    (function () {
+      try {
+        var h = location.hash;
+        var calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+        if ((h === "" || h === "#lobby") && !calm) document.documentElement.classList.add("intro");
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
   <header class="site-header">

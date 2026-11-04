@@ -843,6 +843,21 @@ html.tour-open, html.tour-open body { overflow: hidden; }
   .pager-btn strong { font-size: 16px; }
 }
 
+/* ---------- Opening intro (logo + title start centered, then glide into the header) ---------- */
+html.intro { overflow: hidden; }
+html.intro body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--surface);
+  transition: opacity .7s ease;
+}
+html.intro.intro-reveal body::after { opacity: 0; }
+html.intro .site-header { position: relative; z-index: 101; }
+html.intro .brand-home,
+html.intro .brand-text { opacity: 0; will-change: transform, opacity; }
+
 /* ---------- Footer ---------- */
 .site-footer {
   margin-top: auto;

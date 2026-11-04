@@ -574,6 +574,81 @@
     applyHash();
   });
 
+  /* ---------- Opening intro ---------- */
+  // The logo and title start large in the middle of a white screen, then glide
+  // up into the header while the lobby fades in. Any click, tap or key skips it.
+  function runIntro() {
+    var root = document.documentElement;
+    var logo = document.querySelector(".brand-home");
+    var title = document.querySelector(".brand-text");
+    var inner = document.querySelector(".lobby__inner");
+    var parts = [logo, title, inner];
+    var timers = [], done = false;
+    var skipEvents = ["pointerdown", "keydown", "wheel", "touchstart"];
+
+    function finish() {
+      if (done) return;
+      done = true;
+      timers.forEach(clearTimeout);
+      skipEvents.forEach(function (t) { window.removeEventListener(t, finish, true); });
+      parts.forEach(function (e) { e.style.transition = "none"; e.style.transform = ""; e.style.opacity = ""; e.style.transformOrigin = ""; });
+      root.classList.remove("intro", "intro-reveal");
+      requestAnimationFrame(function () { parts.forEach(function (e) { e.style.transition = ""; }); });
+    }
+    skipEvents.forEach(function (t) { window.addEventListener(t, finish, true); });
+    function at(ms, fn) { timers.push(setTimeout(function () { if (!done) fn(); }, ms)); }
+
+    function start() {
+      if (done) return;
+      window.scrollTo(0, 0);
+      var L = logo.getBoundingClientRect(), E = title.getBoundingClientRect();
+      // Measure the title text itself (its box can be wider than the words)
+      var range = document.createRange();
+      range.selectNodeContents(title.querySelector("h1") || title);
+      var T = range.getBoundingClientRect();
+      if (!T.width) T = E;
+      var vw = window.innerWidth, vh = window.innerHeight;
+      var sL = Math.min(vw * 0.42, 230) / L.width, lh = L.height * sL;
+      var sT = Math.min(1.3, (vw * 0.88) / T.width), th = T.height * sT;
+      var gap = Math.max(20, vh * 0.03);
+      var top = (vh - (lh + gap + th)) / 2;
+      var lx = vw / 2 - (L.left + L.width / 2), ly = top + lh / 2 - (L.top + L.height / 2);
+      var tx = vw / 2 - (T.left + T.width / 2), ty = top + lh + gap + th / 2 - (T.top + T.height / 2);
+      var logoAt = "translate(" + lx + "px," + ly + "px) scale(";
+      var titleAt = "translate(" + tx + "px," + ty + "px) scale(";
+
+      // 1. Place them big and centered (invisible), then fade them in
+      logo.style.transformOrigin = "50% 50%";
+      title.style.transformOrigin = (T.left + T.width / 2 - E.left) + "px " + (T.top + T.height / 2 - E.top) + "px";
+      logo.style.transition = title.style.transition = "none";
+      logo.style.transform = logoAt + sL * 0.94 + ")";
+      title.style.transform = titleAt + sT * 0.97 + ")";
+      inner.style.transform = "translateY(18px)";
+      void logo.offsetWidth;
+      logo.style.transition = title.style.transition = "opacity .6s ease, transform .7s cubic-bezier(.2,.8,.2,1)";
+      logo.style.opacity = title.style.opacity = "1";
+      logo.style.transform = logoAt + sL + ")";
+      title.style.transform = titleAt + sT + ")";
+
+      // 2. Glide up into the header
+      at(1400, function () {
+        logo.style.transition = title.style.transition = "transform 1.1s cubic-bezier(.65,0,.35,1)";
+        logo.style.transform = title.style.transform = "";
+      });
+      // 3. Reveal the lobby underneath
+      at(1800, function () {
+        root.classList.add("intro-reveal");
+        inner.style.transition = "transform .8s cubic-bezier(.2,.8,.2,1)";
+        inner.style.transform = "";
+      });
+      at(2700, finish);
+    }
+
+    // Wait for the fonts so the title is measured at its real size
+    var fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+    Promise.race([fontsReady, new Promise(function (r) { setTimeout(r, 800); })]).then(start);
+  }
+
   /* ---------- Start ---------- */
 
   var first = levels.filter(function (l) { return !l.planOnly; });
@@ -583,4 +658,7 @@
   renderHouse();
   renderNav();
   applyHash();
+  if (document.documentElement.classList.contains("intro")) {
+    if (state.lobby) runIntro(); else document.documentElement.classList.remove("intro");
+  }
 })();
