@@ -44,6 +44,7 @@ window.PROPOSAL = {
       floorPlanFull: "basement.pdf",
       views: [
         { name: "Classroom", url: "https://kuula.co/share/LC6vh?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1", pin: { x: 19.2, y: 49.5 } },
+        { name: "Kitchenette", url: "https://kuula.co/share/LC6vp?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1", pin: { x: 55.8, y: 57.3 } },
       ],
     },
     {
