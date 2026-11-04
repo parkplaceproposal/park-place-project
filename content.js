@@ -53,7 +53,9 @@ window.PROPOSAL = {
       floorPlan: "level-1.png",
       floorPlanFull: "level-1.pdf",
       views: [
-        // { name: "View name", url: "https://kuula.co/share/XXXXX" },
+        { name: "Dining Room", url: "https://kuula.co/share/LC6v0?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1", pin: { x: 56.5, y: 53.9 } },
+        { name: "Kitchen", url: "https://kuula.co/share/LC6vl?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1", pin: { x: 54.2, y: 32.0 } },
+        { name: "Living Room", url: "https://kuula.co/share/LC6vk?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1", pin: { x: 17.4, y: 57.1 } },
       ],
     },
     {
