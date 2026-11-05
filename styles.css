@@ -64,7 +64,7 @@ button { font: inherit; cursor: pointer; }
 /* ---------- Header ---------- */
 .site-header {
   background: var(--surface);
-  padding-block: 24px;
+  padding-block: 18px;
 }
 .site-header .wrap {
   display: flex;
@@ -73,7 +73,7 @@ button { font: inherit; cursor: pointer; }
 }
 .brand-logo {
   flex: none;
-  width: 124px;
+  width: 84px;
   height: auto;
   display: block;
 }
@@ -101,16 +101,16 @@ button { font: inherit; cursor: pointer; }
   margin: 0;
   font-family: var(--font-head);
   font-weight: 600;
-  font-size: clamp(24px, 4.2vw, 46px);
+  font-size: clamp(19px, 2.4vw, 30px);
   line-height: 1.12;
   letter-spacing: -.015em;
   color: var(--navy);
   text-wrap: balance;
 }
 @media (max-width: 600px) {
-  .site-header { padding-block: 18px; }
+  .site-header { padding-block: 14px; }
   .site-header .wrap { gap: 14px; }
-  .brand-logo { width: 72px; }
+  .brand-logo { width: 54px; }
   .eyebrow { font-size: 11px; }
   .eyebrow__extra { display: none; }
 }
