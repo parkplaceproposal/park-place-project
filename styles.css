@@ -763,40 +763,43 @@ html.tour-open, html.tour-open body { overflow: hidden; }
   font-size: 13px; font-weight: 600; line-height: 1;
 }
 
-/* Front card · house · Rear card */
+/* The house leads; Front (top) and Rear (below) are thumbnails stacked to its right.
+   Same arrangement on phones and desktop. */
 .lobby__stage {
-  width: 100%;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  /* empty column on the left balances the thumbnails, so the house stays centered */
+  grid-template-columns: clamp(92px, 12vw, 168px) auto clamp(92px, 12vw, 168px);
+  grid-template-areas: ". house front" ". house rear";
+  grid-template-rows: 1fr 1fr;
   align-items: center;
-  gap: clamp(20px, 4vw, 64px);
+  justify-content: center;
+  gap: 16px clamp(12px, 2.5vw, 36px);
 }
-.lobby__house { min-width: 0; display: flex; justify-content: center; }
+.lobby__house { grid-area: house; min-width: 0; display: flex; justify-content: center; }
 .house { width: auto; height: clamp(300px, 50vh, 430px); max-width: 100%; overflow: visible; }
 
 .exterior-card {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
   width: 100%;
-  max-width: 300px;
-  padding: 10px;
+  padding: 6px;
   border: 1px solid var(--line);
-  border-radius: 16px;
+  border-radius: 14px;
   background: var(--surface);
   box-shadow: var(--shadow);
   color: var(--navy);
   text-align: left;
   transition: border-color .18s, transform .18s, box-shadow .18s;
 }
-.exterior-card--front { justify-self: end; }
-.exterior-card--rear { justify-self: start; }
-.exterior-card:hover { border-color: var(--red); transform: translateY(-3px); }
+.exterior-card--front { grid-area: front; align-self: end; }
+.exterior-card--rear { grid-area: rear; align-self: start; }
+.exterior-card:hover { border-color: var(--red); transform: translateY(-2px); }
 .exterior-card__img {
   display: block;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 9px;
   background: var(--violet-tint);
 }
 .exterior-card__img img {
@@ -811,23 +814,23 @@ html.tour-open, html.tour-open body { overflow: hidden; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 8px;
-  padding: 2px 4px 4px 6px;
+  gap: 6px;
+  padding: 0 2px 2px 4px;
   font-family: var(--font-head);
   font-weight: 600;
-  font-size: 18px;
+  font-size: clamp(13px, 1.2vw, 16px);
 }
 .exterior-card__icon {
   flex: none;
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
+  width: clamp(20px, 2vw, 26px);
+  height: clamp(20px, 2vw, 26px);
   border-radius: 50%;
   background: var(--red);
   color: #fff;
 }
-.exterior-card__icon svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.exterior-card__icon svg { width: 45%; height: 45%; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 @media (prefers-reduced-motion: reduce) {
   .exterior-card, .exterior-card__img img { transition: none; }
 }
@@ -866,31 +869,14 @@ html.tour-open, html.tour-open body { overflow: hidden; }
   .lobby__inner { align-items: stretch; }
   .lobby__text { text-align: left; }
   .lobby__actions { justify-content: flex-start; }
-  /* Phones: the house stays the hero; Front (top) and Rear (below) are small
-     thumbnail buttons stacked to its right */
+  /* Phones: the house fills the space left of the thumbnails */
   .lobby__stage {
     grid-template-columns: minmax(0, 1fr) 92px;
     grid-template-areas: "house front" "house rear";
-    grid-template-rows: 1fr 1fr;
-    align-items: center;
     gap: 14px 12px;
   }
-  .lobby__house { grid-area: house; }
   .house { width: 100%; max-width: 300px; height: auto; }
-  .exterior-card--front { grid-area: front; align-self: end; }
-  .exterior-card--rear { grid-area: rear; align-self: start; }
-  .exterior-card {
-    justify-self: stretch;
-    max-width: none;
-    padding: 5px;
-    gap: 5px;
-    border-radius: 12px;
-  }
   .exterior-card:hover { transform: none; }
-  .exterior-card__img { aspect-ratio: 4 / 3; border-radius: 8px; }
-  .exterior-card__label { padding: 0 2px 2px 4px; font-size: 13px; }
-  .exterior-card__icon { width: 20px; height: 20px; }
-  .exterior-card__icon svg { width: 10px; height: 10px; }
   .floor__name { font-size: 22px; }   /* a touch bigger so it reads well on phones */
 }
 
