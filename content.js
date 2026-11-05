@@ -43,8 +43,8 @@ window.PROPOSAL = {
       floorPlan: "basement.png",
       floorPlanFull: "basement.pdf",
       views: [
-        { name: "Classroom", url: "https://kuula.co/share/LC6vh?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1", pin: { x: 15.4, y: 49.5 } },
-        { name: "Kitchenette", url: "https://kuula.co/share/LC6vp?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1", pin: { x: 55.8, y: 57.3 } },
+        { name: "Classroom", url: "https://kuula.co/share/LC6vh?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1", pin: { x: 15.6, y: 49.5 } },
+        { name: "Kitchenette", url: "https://kuula.co/share/LC6vp?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1", pin: { x: 55.8, y: 56.8 } },
       ],
     },
     {
@@ -64,8 +64,8 @@ window.PROPOSAL = {
       floorPlan: "level-2.png",
       floorPlanFull: "level-2.pdf",
       views: [
-        { name: "Living Room", url: "https://kuula.co/share/LC6vT?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1", pin: { x: 58.8, y: 58.5 } },
-        { name: "Library", url: "https://kuula.co/share/LC6JN?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1", pin: { x: 36.8, y: 44.9 } },
+        { name: "Living Room", url: "https://kuula.co/share/LC6vT?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1", pin: { x: 58.8, y: 57.3 } },
+        { name: "Library", url: "https://kuula.co/share/LC6JN?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1", pin: { x: 36.8, y: 45.6 } },
       ],
     },
     {
@@ -74,7 +74,7 @@ window.PROPOSAL = {
       floorPlan: "dormer.png",
       floorPlanFull: "dormer.pdf",
       views: [
-        { name: "Kitchenette", url: "https://kuula.co/share/LC6vg?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1", pin: { x: 59.7, y: 43.4 } },
+        { name: "Kitchenette", url: "https://kuula.co/share/LC6vg?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1", pin: { x: 59.7, y: 45.2 } },
       ],
     },
 
