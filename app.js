@@ -269,6 +269,28 @@
     modal.querySelector(".tour-modal__close").focus({ preventScroll: true });
   }
 
+  // Front / rear renders on the lobby open as still images in the same viewer
+  function openImage(name, src, trigger) {
+    ensureModal();
+    clearTimeout(modalTimer);
+    modalReturnFocus = trigger || document.activeElement;
+    modalState = { image: src };
+    modal.querySelector(".tour-modal__level").textContent = "Exterior";
+    modal.querySelector("#tour-modal-title").textContent = name;
+    modal.querySelector(".tour-modal__stage").innerHTML =
+      '<img class="tour-image" src="' + esc(src) + '" alt="' + esc(name + " of Park Place") + '">';
+    modal.hidden = false;
+    document.documentElement.classList.add("tour-open");
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { modal.classList.add("is-open"); });
+    });
+    modal.querySelector(".tour-modal__close").focus({ preventScroll: true });
+  }
+  el.lobby.addEventListener("click", function (e) {
+    var card = e.target.closest("[data-exterior]");
+    if (card) openImage(card.getAttribute("data-exterior-name"), card.getAttribute("data-exterior"), card);
+  });
+
   function closeTour() {
     if (!modalState) return;
     modalState = null;

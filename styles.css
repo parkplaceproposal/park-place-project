@@ -606,6 +606,16 @@ html.tour-open, html.tour-open body { overflow: hidden; }
   .tour-modal__bar h3 { font-size: 18px; }
 }
 
+/* A still render shown in the full-screen viewer (front / rear) */
+.tour-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: var(--navy);
+}
+
 /* ---------- Coming soon ---------- */
 .coming-soon {
   display: grid;
@@ -672,12 +682,12 @@ html.tour-open, html.tour-open body { overflow: hidden; }
   padding-block: clamp(32px, 6vw, 72px) clamp(40px, 7vw, 88px);
 }
 .lobby__inner {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 32px clamp(32px, 6vw, 88px);
+  gap: clamp(24px, 4vh, 44px);
 }
-.lobby__text { min-width: 0; max-width: 520px; }
+.lobby__text { min-width: 0; text-align: center; }
 .lobby h2 {
   margin: 0 0 16px;
   font-family: var(--font-head);
@@ -699,7 +709,11 @@ html.tour-open, html.tour-open body { overflow: hidden; }
   text-wrap: balance;
 }
 .lobby__lead span { display: block; }
-.lobby__actions { display: flex; flex-wrap: wrap; gap: 12px; }
+@media (min-width: 768px) {
+  .lobby__lead { margin-bottom: 22px; }
+  .lobby__lead span { display: inline; }   /* one line on wider screens */
+}
+.lobby__actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
 .btn {
   display: inline-flex;
   align-items: center;
@@ -749,8 +763,74 @@ html.tour-open, html.tour-open body { overflow: hidden; }
   font-size: 13px; font-weight: 600; line-height: 1;
 }
 
+/* Front card · house · Rear card */
+.lobby__stage {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(20px, 4vw, 64px);
+}
 .lobby__house { min-width: 0; display: flex; justify-content: center; }
-.house { width: 100%; max-width: 440px; height: auto; overflow: visible; }
+.house { width: auto; height: clamp(300px, 50vh, 430px); max-width: 100%; overflow: visible; }
+
+.exterior-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  color: var(--navy);
+  text-align: left;
+  transition: border-color .18s, transform .18s, box-shadow .18s;
+}
+.exterior-card--front { justify-self: end; }
+.exterior-card--rear { justify-self: start; }
+.exterior-card:hover { border-color: var(--red); transform: translateY(-3px); }
+.exterior-card__img {
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--violet-tint);
+}
+.exterior-card__img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .4s ease;
+}
+.exterior-card:hover .exterior-card__img img { transform: scale(1.05); }
+.exterior-card__label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 2px 4px 4px 6px;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 18px;
+}
+.exterior-card__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--red);
+  color: #fff;
+}
+.exterior-card__icon svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+@media (prefers-reduced-motion: reduce) {
+  .exterior-card, .exterior-card__img img { transition: none; }
+}
 .house__line {
   fill: none;
   stroke: var(--violet);
@@ -783,10 +863,22 @@ html.tour-open, html.tour-open body { overflow: hidden; }
 .floor:focus-visible .floor__name { fill: var(--red); }
 
 @media (max-width: 767px) {
-  .lobby__inner { grid-template-columns: minmax(0, 1fr); }
-  .lobby__text { max-width: none; }
-  .lobby__house { order: 2; }
-  .house { max-width: 360px; }
+  .lobby__inner { align-items: stretch; }
+  .lobby__text { text-align: left; }
+  .lobby__actions { justify-content: flex-start; }
+  /* Phones: house on top, Front and Rear side by side below it */
+  .lobby__stage {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas: "house house" "front rear";
+    gap: 24px 12px;
+  }
+  .lobby__house { grid-area: house; }
+  .exterior-card--front { grid-area: front; justify-self: stretch; max-width: none; }
+  .exterior-card--rear { grid-area: rear; justify-self: stretch; max-width: none; }
+  .house { width: 100%; max-width: 360px; height: auto; }
+  .exterior-card { padding: 8px; gap: 8px; }
+  .exterior-card__label { font-size: 16px; }
+  .exterior-card__icon { width: 28px; height: 28px; }
 }
 
 /* ---------- Previous / next level ---------- */
