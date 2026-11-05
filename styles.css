@@ -866,19 +866,41 @@ html.tour-open, html.tour-open body { overflow: hidden; }
   .lobby__inner { align-items: stretch; }
   .lobby__text { text-align: left; }
   .lobby__actions { justify-content: flex-start; }
-  /* Phones: house on top, Front and Rear side by side below it */
+  /* Phones: house on the left; Front (top) and Rear (bottom) stacked on the right,
+     together as tall as the house */
   .lobby__stage {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    grid-template-areas: "house house" "front rear";
-    gap: 24px 12px;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    grid-template-areas: "house front" "house rear";
+    align-items: stretch;
+    gap: 10px 12px;
   }
-  .lobby__house { grid-area: house; }
-  .exterior-card--front { grid-area: front; justify-self: stretch; max-width: none; }
-  .exterior-card--rear { grid-area: rear; justify-self: stretch; max-width: none; }
-  .house { width: 100%; max-width: 360px; height: auto; }
-  .exterior-card { padding: 8px; gap: 8px; }
-  .exterior-card__label { font-size: 16px; }
-  .exterior-card__icon { width: 28px; height: 28px; }
+  .lobby__house { grid-area: house; align-items: center; }
+  .house { width: 100%; max-width: none; height: auto; }
+  .exterior-card--front { grid-area: front; }
+  .exterior-card--rear { grid-area: rear; }
+  .exterior-card {
+    position: relative;
+    justify-self: stretch;
+    max-width: none;
+    min-height: 0;
+    padding: 0;
+    gap: 0;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+  .exterior-card:hover { transform: none; }
+  .exterior-card__img { position: absolute; inset: 0; aspect-ratio: auto; border-radius: 0; }
+  .exterior-card__label {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    padding: 22px 6px 6px 10px;
+    background: linear-gradient(rgba(35, 11, 63, 0), rgba(35, 11, 63, .78));
+    color: #fff;
+    font-size: 15px;
+  }
+  .exterior-card__icon { width: 24px; height: 24px; }
+  .exterior-card__icon svg { width: 12px; height: 12px; }
+  .floor__name { font-size: 27px; }   /* stays readable on the smaller house */
 }
 
 /* ---------- Previous / next level ---------- */
