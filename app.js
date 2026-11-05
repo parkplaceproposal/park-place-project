@@ -107,7 +107,7 @@
 
     // Walls run from y=178 to y=352; split that space between the stacked floors
     var slots = [];
-    if (roof) slots.push({ l: roof, x: 128, y: 112, w: 144, h: 54 });
+    if (roof) slots.push({ l: roof, x: 116, y: 112, w: 168, h: 54 });
     var top = 182, bottom = 344, gap = 8;
     var h = stack.length ? (bottom - top - gap * (stack.length - 1)) / stack.length : 0;
     stack.forEach(function (l, i) { slots.push({ l: l, x: 66, y: top + i * (h + gap), w: 268, h: h }); });
@@ -129,6 +129,7 @@
         '<a class="floor' + (s.below ? " floor--below" : "") + '" href="' + levelHref(s.l.id) + '" aria-label="' + esc(s.l.name) + '">' +
         '<rect x="' + s.x + '" y="' + s.y + '" width="' + s.w + '" height="' + s.h + '" rx="8"/>' +
         '<text class="floor__name" x="200" y="' + cy + '" dominant-baseline="central">' + esc(s.l.name) + "</text>" +
+        '<path class="floor__arrow" d="M' + (s.x + s.w - 20) + " " + (cy - 7) + "l6 7-6 7" + '"/>' +
         "</a>";
     });
     svg += "</svg>";

@@ -679,13 +679,13 @@ html.tour-open, html.tour-open body { overflow: hidden; }
   flex: 1;
   display: flex;
   align-items: center;
-  padding-block: clamp(32px, 6vw, 72px) clamp(40px, 7vw, 88px);
+  padding-block: clamp(20px, 3.5vh, 48px) clamp(24px, 4vh, 56px);
 }
 .lobby__inner {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(24px, 4vh, 44px);
+  gap: clamp(18px, 3vh, 32px);
 }
 .lobby__text { min-width: 0; text-align: center; }
 .lobby h2 {
@@ -702,7 +702,7 @@ html.tour-open, html.tour-open body { overflow: hidden; }
   margin: 0 0 28px;
   font-family: var(--font-head);
   font-weight: 600;
-  font-size: clamp(30px, 4.2vw, 50px);
+  font-size: clamp(30px, 3.6vw, 44px);
   line-height: 1.12;
   letter-spacing: -.015em;
   color: var(--navy);
@@ -710,7 +710,7 @@ html.tour-open, html.tour-open body { overflow: hidden; }
 }
 .lobby__lead span { display: block; }
 @media (min-width: 768px) {
-  .lobby__lead { margin-bottom: 22px; }
+  .lobby__lead { margin-bottom: 18px; }
   .lobby__lead span { display: inline; }   /* one line on wider screens */
 }
 .lobby__actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
@@ -768,7 +768,7 @@ html.tour-open, html.tour-open body { overflow: hidden; }
 .lobby__stage {
   display: grid;
   /* empty column on the left balances the thumbnails, so the house stays centered */
-  grid-template-columns: clamp(92px, 12vw, 168px) auto clamp(92px, 12vw, 168px);
+  grid-template-columns: clamp(92px, 11vw, 150px) auto clamp(92px, 11vw, 150px);
   grid-template-areas: ". house front" ". house rear";
   grid-template-rows: 1fr 1fr;
   align-items: center;
@@ -776,7 +776,7 @@ html.tour-open, html.tour-open body { overflow: hidden; }
   gap: 16px clamp(12px, 2.5vw, 36px);
 }
 .lobby__house { grid-area: house; min-width: 0; display: flex; justify-content: center; }
-.house { width: auto; height: clamp(300px, 50vh, 430px); max-width: 100%; overflow: visible; }
+.house { width: auto; height: clamp(260px, 42vh, 420px); max-width: 100%; overflow: visible; }
 
 .exterior-card {
   display: flex;
@@ -784,20 +784,20 @@ html.tour-open, html.tour-open body { overflow: hidden; }
   gap: 6px;
   width: 100%;
   padding: 6px;
-  border: 1px solid var(--line);
-  border-radius: 14px;
+  border: 1.5px solid var(--violet-tint);
+  border-radius: 12px;
   background: var(--surface);
-  box-shadow: var(--shadow);
   color: var(--navy);
   text-align: left;
-  transition: border-color .18s, transform .18s, box-shadow .18s;
+  transition: border-color .18s;
 }
 .exterior-card--front { grid-area: front; align-self: end; }
 .exterior-card--rear { grid-area: rear; align-self: start; }
-.exterior-card:hover { border-color: var(--red); transform: translateY(-2px); }
+.exterior-card:hover,
+.exterior-card:focus-visible { border-color: var(--red); }
 .exterior-card__img {
   display: block;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 3 / 2;
   overflow: hidden;
   border-radius: 9px;
   background: var(--violet-tint);
@@ -864,6 +864,17 @@ html.tour-open, html.tour-open body { overflow: hidden; }
 .floor:focus-visible rect { fill: #fcd7d7; fill-opacity: 1; stroke: var(--red); }
 .floor:hover .floor__name,
 .floor:focus-visible .floor__name { fill: var(--red); }
+/* small arrow on each floor so it reads as clickable (also on phones) */
+.floor__arrow {
+  fill: none;
+  stroke: var(--violet);
+  stroke-width: 2.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke .18s, transform .18s;
+}
+.floor:hover .floor__arrow,
+.floor:focus-visible .floor__arrow { stroke: var(--red); transform: translateX(2px); }
 
 @media (max-width: 767px) {
   .lobby__inner { align-items: stretch; }
@@ -876,7 +887,6 @@ html.tour-open, html.tour-open body { overflow: hidden; }
     gap: 14px 12px;
   }
   .house { width: 100%; max-width: 300px; height: auto; }
-  .exterior-card:hover { transform: none; }
   .floor__name { font-size: 22px; }   /* a touch bigger so it reads well on phones */
 }
 
